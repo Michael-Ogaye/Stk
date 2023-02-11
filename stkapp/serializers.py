@@ -8,4 +8,4 @@ from .models import LNM
 class LNMSerializer(serializers.ModelSerializer):
     class Meta:
         model =LNM
-        fields = ("id",'Amount','PhoneNumber')
+        fields = ("id")
