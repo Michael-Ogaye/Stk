@@ -3,12 +3,14 @@ import base64
 from requests.auth import HTTPBasicAuth
 from datetime import datetime
 import json
+from django.conf import settings
 
 class StkPush:
-    def __init__(self,consumer_key,consumer_secret,pass_key):
-        self.consumer_secret=consumer_secret
-        self.consumer_key=consumer_key
-        self.pass_key=pass_key
+    def __init__(self):
+        self.consumer_secret=settings.CONSUMER_SECRET
+        self.consumer_key=settings.CONSUMER_KEY
+        self.pass_key=settings.PASS_KEY
+        self.shortCode=settings.SHORT_CODE
 
     def auth_token(self):
         authm=HTTPBasicAuth(self.consumer_key,self.consumer_secret)
