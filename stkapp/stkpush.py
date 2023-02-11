@@ -41,3 +41,31 @@ class StkPush:
         decoded_password = encoded_string.decode("utf-8")
 
         return decoded_password
+
+    def lNM(self,amount,phone):
+        access_token=self.auth_token()
+        timstamp=self.timestamp()
+        passwrd=self.generate_password()
+        lpm_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+
+
+        headers = {"Authorization": "Bearer %s" % access_token}
+
+        data = {
+            "BusinessShortCode": self.shortCode,
+             "Password": passwrd,
+             "Timestamp": timstamp,
+             "TransactionType": "CustomerPayBillOnline",
+            "Amount": amount,
+             "PartyA": phone,
+            "PartyB": self.shortCode,
+            "PhoneNumber": phone,
+             "CallBackURL": "",
+             "AccountReference": "sasakazi",
+            "TransactionDesc": "pay for product",
+    }
+
+        res= requests.post(lpm_url, json=data, headers=headers)
+
+    
+
