@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 
+
+
 class LNM(models.Model):
     CheckoutRequestID = models.CharField(max_length=50, blank=True, null=True)
     MerchantRequestID = models.CharField(max_length=20, blank=True, null=True)
@@ -14,5 +16,10 @@ class LNM(models.Model):
     PhoneNumber = models.CharField(max_length=13, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.PhoneNumber} has sent {self.Amount} >> {self.MpesaReceiptNumber}"
+        return f"{self.PhoneNumber}   {self.Amount}  {self.MpesaReceiptNumber}"
+
+class Product(models.Model):
+    name=models.CharField(max_length=16)
+    description=models.CharField(max_length=355)
+    price=models.DecimalField()
 

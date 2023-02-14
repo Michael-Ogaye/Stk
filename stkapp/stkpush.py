@@ -58,13 +58,13 @@ class StkPush:
              "Password": passwrd,
              "Timestamp": timstamp,
              "TransactionType": "CustomerPayBillOnline",
-            "Amount": amount,
-             "PartyA": phone,
+            "Amount": str(amount),
+             "PartyA": str(phone),
             "PartyB": self.shortCode,
             "PhoneNumber": phone,
              "CallBackURL": "",
              "AccountReference": "sasakazi",
-            "TransactionDesc": "pay for product",
+            "TransactionDesc": "Pay for product",
     }
 
         res= requests.post(lpm_url, json=data, headers=headers)
