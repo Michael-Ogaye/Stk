@@ -54,13 +54,13 @@ class StkPush:
         headers = {"Authorization": "Bearer %s" % access_token}
 
         data = {
-            "BusinessShortCode": self.shortCode,
+            "BusinessShortCode": int(self.shortCode),
              "Password": passwrd,
              "Timestamp": timstamp,
              "TransactionType": "CustomerPayBillOnline",
-            "Amount": str(amount),
-             "PartyA": str(phone),
-            "PartyB": self.shortCode,
+            "Amount": int(amount),
+             "PartyA": int(phone),
+            "PartyB": int(self.shortCode),
             "PhoneNumber": phone,
              "CallBackURL": "",
              "AccountReference": "sasakazi",
