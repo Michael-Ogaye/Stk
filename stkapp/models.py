@@ -21,5 +21,11 @@ class LNM(models.Model):
 class Product(models.Model):
     name=models.CharField(max_length=16)
     description=models.CharField(max_length=355)
-    price=models.DecimalField()
+    price=models.IntegerField()
+    def __str__(self):
+        return 'f{self.name}'
+
+class Profile(models.Model):
+    phone=models.IntegerField()
+
 

@@ -1,12 +1,13 @@
 from django.shortcuts import render
-
+from django.contrib.auth.models import User
 # Create your views here.
 from rest_framework.generics import CreateAPIView
 
 from rest_framework.permissions import AllowAny
 
-from .models import LNM
+from .models import LNM,Product
 from .serializers import LNMSerializer
+from .stkpush import StkPush
 
 
 class LNMCallbackUrlAPIView(CreateAPIView):
@@ -74,3 +75,18 @@ class LNMCallbackUrlAPIView(CreateAPIView):
         from rest_framework.response import Response
 
         return Response({"Transaction succesful"})
+
+
+def products(request):
+    all_products=Product.objects.all()
+    return render(request,'stkapp/products.html',{'prods':all_products})
+
+def product(request,pk):
+    a_prod=Product.objects.get(pk=pk)
+    return render(request,'stkapp/product.html',{'prod':a_prod})
+
+def purchase(request,pk):
+
+    a_prod=Product.objects.get(pk=pk)
+    price=a_prod.price
+    
