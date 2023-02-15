@@ -126,5 +126,7 @@ def product(request,pk):
 def purchase(request,pk):
 
     a_prod=Product.objects.get(pk=pk)
-    price=a_prod.price
+    price=str(a_prod.price)
+    phone=(request.user.phone_number)
+    StkPush().lNM(price,phone)
     

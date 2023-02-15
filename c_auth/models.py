@@ -1,7 +1,10 @@
+from django.db import models
+
+
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import AbstractUser
-from django.db import models
+
 
 class CustomUserManager(BaseUserManager):
     """
@@ -35,7 +38,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     phone_number=models.IntegerField()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ('username',phone_number)
+    REQUIRED_FIELDS = ('username','phone_number')
 
     objects = CustomUserManager()
 

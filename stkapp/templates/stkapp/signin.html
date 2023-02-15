@@ -1,13 +1,15 @@
 {%extends 'stkapp/base.html'%}
+{% load crispy_forms_tags %}
 
 {%block content%}
 <div>
     {%csrf_token%}
         {{form}}
     
-        <button>
+        <button class="btn btn-success d-block my-5">
             Submit
         </button>
+        <a href="{% url 'join'%}">Signup</a>
     
     </div>
 

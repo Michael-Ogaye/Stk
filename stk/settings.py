@@ -48,6 +48,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'stkapp',
     "corsheaders",
+    'c_auth',
+    'crispy_forms',
+    'bootstrap4',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -152,8 +157,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
 
 
-AUTH_USER_MODEL = 'users.CustomUser'
-# Default primary key field type
+AUTH_USER_MODEL = 'c_auth.CustomUser'
+# # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
+CRISPY_TEMPLATE_PACK='bootstrap4'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

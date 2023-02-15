@@ -5,7 +5,7 @@ urlpatterns = [
     path('lnm/',LNMCallbackUrlAPIView.as_view(), name='lnm' ),
     path('',products,name='prods'),
     path('prod/<int:pk>',product,name='prod'),
-    path('purchase/<int:pk',purchase,name='purch'),
+    path('purchase/<int:pk>',purchase,name='purch'),
     path('signin',signin,name='login'),
     path('sinup',signup,name='join'),
 ]

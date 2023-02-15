@@ -1,5 +1,20 @@
 {%extends 'stkapp/base.html'%}
 
 {%block content%}
+{%for prod in prods%}
+<div class="card">
+    <h5>{{prod.name}}</h5>
+    <p>
+        {{prod.description}} 
 
+
+    </p>
+    <p class="card-footer text-secondary">
+        {{prod.price}}
+
+    </p>
+    <a  class="btn btn-primary" href="{%url 'prod' prod.pk %}">buy</a>
+
+</div>
+{%endfor%}
 {% endblock%}
