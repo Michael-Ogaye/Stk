@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 # Create your views here.
 from rest_framework.generics import CreateAPIView
@@ -8,6 +8,41 @@ from rest_framework.permissions import AllowAny
 from .models import LNM,Product
 from .serializers import LNMSerializer
 from .stkpush import StkPush
+from .forms import SignupForm,SignInForm
+from django.contrib.auth import login,authenticate
+from django.contrib.auth.decorators import login_required
+
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('prods')
+    else:
+        form = SignupForm()
+    return render(request, 'stkapp/signup.html', {'form': form})
+
+def signin(request):
+    if request.method=='POST':
+        form=SignInForm(request.POST)
+        if form.is_valid():
+            
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password1')
+            user=authenticate(email,password)
+            if user is not None:
+                login(request,user)
+    else:
+        form = SignInForm()
+    return render(request, 'stkapp/signin.html', {'form': form})
+
+
 
 
 class LNMCallbackUrlAPIView(CreateAPIView):
@@ -77,14 +112,17 @@ class LNMCallbackUrlAPIView(CreateAPIView):
         return Response({"Transaction succesful"})
 
 
+@login_required(login_url='login')
 def products(request):
     all_products=Product.objects.all()
     return render(request,'stkapp/products.html',{'prods':all_products})
 
+@login_required(login_url='login')
 def product(request,pk):
     a_prod=Product.objects.get(pk=pk)
     return render(request,'stkapp/product.html',{'prod':a_prod})
 
+@login_required(login_url='login')
 def purchase(request,pk):
 
     a_prod=Product.objects.get(pk=pk)

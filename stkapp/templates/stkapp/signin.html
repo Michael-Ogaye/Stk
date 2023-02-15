@@ -1,0 +1,14 @@
+{%extends 'stkapp/base.html'%}
+
+{%block content%}
+<div>
+    {%csrf_token%}
+        {{form}}
+    
+        <button>
+            Submit
+        </button>
+    
+    </div>
+
+{% endblock%}
