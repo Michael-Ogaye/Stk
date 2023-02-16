@@ -13,19 +13,21 @@ class StkPush:
         self.shortCode=settings.SHORT_CODE
 
     def auth_token(self):
+        print(self.consumer_secret,self.shortCode)
         authm=HTTPBasicAuth(self.consumer_key,self.consumer_secret)
         
         url_auth='https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
-        try:
+        # try:
 
-           res=requests.get(url_auth,auth=authm)
+        #    res=requests.get(url_auth,auth=authm)
 
-        except:
-            res=requests.get(url_auth,auth=authm,verify=False)
+        # except:
+        res=requests.get(url_auth,auth=authm)
 
         return res.json()['access_token']
 
-    def timestamp():
+
+    def timestamp(self):
       unformatted_time = datetime.now()
       formatted_time = unformatted_time.strftime("%Y%m%d%H%M%S")
 
@@ -45,8 +47,11 @@ class StkPush:
         return decoded_password
 
     def lNM(self,amount,phone):
+        
         access_token=self.auth_token()
+       
         timstamp=self.timestamp()
+        print(access_token,timstamp)
         passwrd=self.generate_password()
         lpm_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
 
@@ -55,19 +60,20 @@ class StkPush:
 
         data = {
             "BusinessShortCode": int(self.shortCode),
-             "Password": passwrd,
-             "Timestamp": timstamp,
-             "TransactionType": "CustomerPayBillOnline",
+            "Password": passwrd,
+            "Timestamp": timstamp,
+            "TransactionType": "CustomerPayBillOnline",
             "Amount": int(amount),
-             "PartyA": int(phone),
+            "PartyA": int(phone),
             "PartyB": int(self.shortCode),
-            "PhoneNumber": phone,
-             "CallBackURL": "",
-             "AccountReference": "sasakazi",
+            "PhoneNumber": int(phone),
+            "CallBackURL": "",
+            "AccountReference": "sasakazi",
             "TransactionDesc": "Pay for product",
     }
 
         res= requests.post(lpm_url, json=data, headers=headers)
+        print(res)
 
     
 
