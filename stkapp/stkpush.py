@@ -66,8 +66,8 @@ class StkPush:
             "Amount": int(amount),
             "PartyA": int(phone),
             "PartyB": int(self.shortCode),
-            "PhoneNumber": int(phone),
-            "CallBackURL": "stkdemo.up.railway.app/lnm/",
+            "PhoneNumber":int(phone),
+            "CallBackURL":"https://stkdemo.up.railway.app/lnm/",
             "AccountReference": "sasakazi",
             "TransactionDesc": "Pay for product",
     }
