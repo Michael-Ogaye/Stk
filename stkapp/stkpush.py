@@ -58,7 +58,7 @@ class StkPush:
 
         headers = {"Authorization": "Bearer %s" % access_token}
 
-        data = {
+        req = {
             "BusinessShortCode": int(self.shortCode),
             "Password": passwrd,
             "Timestamp": timstamp,
@@ -67,13 +67,13 @@ class StkPush:
             "PartyA": int(phone),
             "PartyB": int(self.shortCode),
             "PhoneNumber": int(phone),
-            "CallBackURL": "",
+            "CallBackURL": "stkdemo.up.railway.app/lnm/",
             "AccountReference": "sasakazi",
             "TransactionDesc": "Pay for product",
     }
 
-        res= requests.post(lpm_url, json=data, headers=headers)
-        print(res)
+        res= requests.post(lpm_url, json=req, headers=headers)
+        print(res.text)
 
     
 
