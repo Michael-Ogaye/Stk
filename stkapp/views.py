@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny
 from .models import LNM,Product
 from .serializers import LNMSerializer
 from .stkpush import StkPush
-from .forms import SignupForm,SignInForm
+from .forms import SignupForm,SignInForm,PurchasForm
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.decorators import login_required
 
@@ -124,9 +124,21 @@ def product(request,pk):
 
 @login_required(login_url='login')
 def purchase(request,pk):
-
-    a_prod=Product.objects.get(pk=pk)
-    price=a_prod.price
-    phone=request.user.phone_number
-    StkPush().lNM(price,phone)
+    if request.method=='POST':
+        form=PurchasForm(request.POST)
+        if form.is_valid():
+            a_prod=Product.objects.get(pk=pk)
+            price=a_prod.price
+            phone=form.cleaned_data.get('phone')
+            used_no=int(str(phone)[::-1][0:10][::-1] +'254')
+            
+            StkPush().lNM(price,used_no)
+            return redirect('prods')
     
+    else:
+        form =PurchasForm()
+    return render(request, 'stkapp/purch.html', {'form': form})
+
+
+
+        

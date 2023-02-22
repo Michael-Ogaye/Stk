@@ -16,3 +16,6 @@ class SignInForm(UserCreationForm):
     class Meta:
         model=CustomUser
         fields=('email','password1')
+
+class PurchasForm(forms.Form):
+    phone=forms.IntegerField()

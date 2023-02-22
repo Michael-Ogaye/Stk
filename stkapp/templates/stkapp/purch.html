@@ -1,0 +1,15 @@
+{% extends 'stkapp/base.html'%}
+{%block content%}
+<form method="post" action="">
+    {% csrf_token%}
+    <label for="phone">
+        PHONE NO:
+    </label>
+    {{form.as_P}}
+
+    <button>SUBMIT</button>
+
+
+</form>
+    
+{% endblock%}

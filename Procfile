@@ -1,1 +1,1 @@
-web: gunicorn 'stk.wsgi'
+web: gunicorn stk.wsgi
